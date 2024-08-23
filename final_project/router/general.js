@@ -63,10 +63,10 @@ public_users.get('/title/:title',function (req, res) {
     // Obtain all keys for the 'books' object
     const bookKeys = Object.keys(books);
 
-    // Filter the books by author
+    // Filter the books by title
     let filtered_books = bookKeys.map(key => books[key]).filter(book => book.title === title);
 
-    // Check if any books were found for the given author
+    // Check if any books were found for the given title
     if (filtered_books.length > 0) {
         // Send the filtered_books array as the response to the client
         res.send(filtered_books);
@@ -78,9 +78,21 @@ public_users.get('/title/:title',function (req, res) {
 });
 
 //  Get book review
-public_users.get('/review/:isbn',function (req, res) {
-  //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+public_users.get('/review/:isbn', function (req, res) {
+    // Extract the ISBN parameter from the request URL
+    const isbn = req.params.isbn;
+
+    // Check if the book with the given ISBN exists
+    if (books[isbn]) {
+        // Retrieve the reviews for the book
+        const reviews = books[isbn].reviews;
+
+        // Send the reviews as the response
+        res.send(reviews);
+    } else {
+        // If the book with the given ISBN does not exist, send a 404 response
+        res.status(404).json({ message: "Book not found" });
+    }
 });
 
 module.exports.general = public_users;
