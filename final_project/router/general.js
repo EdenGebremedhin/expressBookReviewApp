@@ -12,7 +12,7 @@ const doesExist = (username) => {
     });
     // Return true if any user with the same username is found, otherwise false
     return userswithsamename.length > 0;
-}
+} 
 
 public_users.post("/register", (req, res) => {
     // Extract username and password from request body

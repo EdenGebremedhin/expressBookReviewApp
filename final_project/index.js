@@ -29,6 +29,10 @@ app.use("/customer/auth/*", function auth(req, res, next) {
     }
 });
 
+
+
+
+
 app.use("/customer", customer_routes);
 app.use("/", genl_routes);
 
